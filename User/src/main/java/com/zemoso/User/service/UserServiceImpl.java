@@ -99,6 +99,7 @@ public class UserServiceImpl implements UserService, StockService {
     @Override
     public List<Stock> getOwnedStocks() {
         User user = userRepository.findByName(getUserData());
+        System.out.println(user.getName());
         return user.getUserStocks();
     }
 
@@ -112,6 +113,7 @@ public class UserServiceImpl implements UserService, StockService {
         Stock stock = stockServiceClient.getStockBySymbol(stockSymbol);
 
         User user = userRepository.findByName(getUserData());
+        user.setAccounts(accountServiceClient.getAccountsOfUser(user.getId()));
         Account userAccount = user.getAccounts().stream().filter(account -> account.getId().equals(accountId)).findFirst().orElseThrow(() -> new RuntimeException("Account not found"));
 
         if (userAccount.getAmount() < stock.getPrice()) {
@@ -132,6 +134,7 @@ public class UserServiceImpl implements UserService, StockService {
     @Override
     public String sellStock(String stockSymbol, Long accountId) {
         User user = userRepository.findByName(getUserData());
+        user.setAccounts(accountServiceClient.getAccountsOfUser(user.getId()));
         Account userAccount = user.getAccounts().stream().filter(account -> account.getId().equals(accountId)).findFirst().orElseThrow(() -> new RuntimeException("Account not found"));
 
         Stock stock = stockServiceClient.getStockBySymbol(stockSymbol);

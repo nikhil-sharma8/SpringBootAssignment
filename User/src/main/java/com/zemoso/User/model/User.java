@@ -32,6 +32,14 @@ public class User {
     @CollectionTable(name = "user_stocks", joinColumns = @JoinColumn(name = "user_id"))
     private List<Stock> userStocks = new ArrayList<>();
 
+    public User(long l, String nikhil, String devIntern, String mail, String number) {
+        this.id = l;
+        this.name = nikhil;
+        this.occupation = devIntern;
+        this.email = mail;
+        this.password = number;
+    }
+
     public void sellStockBySymbol(String stockSymbol) {
         if (this.userStocks != null) {
             this.userStocks.removeIf(stock -> stock.getSymbol().equalsIgnoreCase(stockSymbol));

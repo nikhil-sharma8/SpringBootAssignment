@@ -19,7 +19,7 @@ public class StockController {
         return userService.getOwnedStocks();
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<Stock> getFullStockList() {
         return userService.getFullStockList();
     }
