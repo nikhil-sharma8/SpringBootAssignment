@@ -14,7 +14,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class StockServiceImplTest {
+class StockServiceImplTest {
 
     @Mock
     private IStockRepository stockRepository;
@@ -25,7 +25,7 @@ public class StockServiceImplTest {
     private Stock stock;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.openMocks(this);
 
         stock = new Stock();
@@ -38,7 +38,7 @@ public class StockServiceImplTest {
     }
 
     @Test
-    public void testGetAllStocks() {
+    void testGetAllStocks() {
         when(stockRepository.findAll()).thenReturn(Collections.singletonList(stock));
 
         assertEquals(1, stockService.getAllStocks().size());
@@ -48,7 +48,7 @@ public class StockServiceImplTest {
     }
 
     @Test
-    public void testSaveStock() {
+    void testSaveStock() {
         when(stockRepository.save(any(Stock.class))).thenReturn(stock);
 
         String result = stockService.saveStock(stock);
@@ -58,7 +58,7 @@ public class StockServiceImplTest {
     }
 
     @Test
-    public void testGetStockBySymbol() {
+    void testGetStockBySymbol() {
         when(stockRepository.findBySymbol("AAPL")).thenReturn(stock);
 
         Stock result = stockService.getStockBySymbol("AAPL");
@@ -68,7 +68,7 @@ public class StockServiceImplTest {
     }
 
     @Test
-    public void testDeleteStock() {
+    void testDeleteStock() {
         doNothing().when(stockRepository).deleteById(1L);
 
         String result = stockService.deleteStock(1L);

@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(StockController.class)
-public class StockControllerTest {
+class StockControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -43,7 +43,7 @@ public class StockControllerTest {
     }
 
     @Test
-    public void testGetAllStocks() throws Exception {
+    void testGetAllStocks() throws Exception {
         List<Stock> stocks = Collections.singletonList(stock);
 
         when(stockService.getAllStocks()).thenReturn(stocks);
@@ -57,7 +57,7 @@ public class StockControllerTest {
     }
 
     @Test
-    public void testGetStockBySymbol() throws Exception {
+    void testGetStockBySymbol() throws Exception {
         when(stockService.getStockBySymbol("AAPL")).thenReturn(stock);
 
         mockMvc.perform(get("/api/v1/stock/AAPL"))
@@ -69,7 +69,7 @@ public class StockControllerTest {
     }
 
     @Test
-    public void testSaveStock() throws Exception {
+    void testSaveStock() throws Exception {
         when(stockService.saveStock(any(Stock.class))).thenReturn("Stock saved!");
 
         mockMvc.perform(post("/api/v1/stock")
@@ -82,7 +82,7 @@ public class StockControllerTest {
     }
 
     @Test
-    public void testDeleteStock() throws Exception {
+    void testDeleteStock() throws Exception {
         when(stockService.deleteStock(1L)).thenReturn("Stock deleted!");
 
         mockMvc.perform(delete("/api/v1/stock/1"))
