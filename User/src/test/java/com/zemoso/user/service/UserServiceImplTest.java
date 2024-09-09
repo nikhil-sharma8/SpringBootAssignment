@@ -25,16 +25,16 @@ import java.util.Optional;
 class UserServiceImplTest {
 
     @Mock
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Mock
-    AccountServiceClient accountServiceClient;
+    private AccountServiceClient accountServiceClient;
 
     @Mock
-    StockServiceClient stockServiceClient;
+    private StockServiceClient stockServiceClient;
 
     @InjectMocks
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     private User testUser;
 
@@ -56,8 +56,8 @@ class UserServiceImplTest {
 
         assertNotNull(users);
         assertEquals(1, users.size());
-        verify(userRepository, times(1)).findAll();
-        verify(accountServiceClient, times(1)).getAccountsOfUser(testUser.getId());
+        verify(userRepository).findAll();
+        verify(accountServiceClient).getAccountsOfUser(testUser.getId());
     }
 
     @Test
@@ -69,21 +69,18 @@ class UserServiceImplTest {
 
         assertNotNull(user);
         assertEquals(testUser.getId(), user.getId());
-        verify(userRepository, times(1)).findById(testUser.getId());
-        verify(accountServiceClient, times(1)).getAccountsOfUser(testUser.getId());
+        verify(userRepository).findById(testUser.getId());
+        verify(accountServiceClient).getAccountsOfUser(testUser.getId());
     }
 
     @Test
     void testGetUserById_UserNotFound() {
         when(userRepository.findById(testUser.getId())).thenReturn(Optional.empty());
 
-        Long userId = testUser.getId();
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            userService.getUserById(userId);
-        });
+        Exception exception = assertThrows(RuntimeException.class, () -> userService.getUserById(testUser.getId()));
 
         assertEquals("User not found", exception.getMessage());
-        verify(userRepository, times(1)).findById(testUser.getId());
+        verify(userRepository).findById(testUser.getId());
     }
 
     @Test
@@ -92,7 +89,7 @@ class UserServiceImplTest {
 
         userService.saveUser(testUser);
 
-        verify(userRepository, times(1)).save(testUser);
+        verify(userRepository).save(testUser);
         assertNotEquals("rawPassword", testUser.getPassword());  // Password should be encoded
     }
 
@@ -100,7 +97,7 @@ class UserServiceImplTest {
     void testDeleteUser() {
         userService.deleteUser(testUser.getId());
 
-        verify(userRepository, times(1)).deleteById(testUser.getId());
+        verify(userRepository).deleteById(testUser.getId());
     }
 
     @Test
@@ -108,10 +105,7 @@ class UserServiceImplTest {
         when(userRepository.findById(testUser.getId())).thenReturn(Optional.of(testUser));
         when(accountServiceClient.getAccountsOfUser(testUser.getId())).thenReturn(List.of(new Account(2L,"ABC", 100.0, 1L)));
 
-        Long userId = testUser.getId();
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            userService.updateBalance(userId, 100.0, 1L);
-        });
+        Exception exception = assertThrows(RuntimeException.class, () -> userService.updateBalance(testUser.getId(), 100.0, 1L));
 
         assertEquals("Account Not Found", exception.getMessage());
     }
@@ -139,15 +133,15 @@ class UserServiceImplTest {
         String result = userService.buyStock("AAPL", account.getId());
 
         assertEquals("Stock Bought", result);
-        verify(accountServiceClient, times(1)).updateAccountInAccountService(account);
-        verify(userRepository, times(1)).save(testUser);
+        verify(accountServiceClient).updateAccountInAccountService(account);
+        verify(userRepository).save(testUser);
     }
 
     @Test
     void testSellStock() {
         Stock stock = new Stock();
         stock.setPrice(50.0);
-        Account account =new Account(1L,"ABC", 100.0, 1L);
+        Account account = new Account(1L,"ABC", 100.0, 1L);
 
         MyUserDetails userDetails = mock(MyUserDetails.class);
         when(userDetails.getUsername()).thenReturn("testUser");
@@ -166,8 +160,8 @@ class UserServiceImplTest {
         String result = userService.sellStock("AAPL", account.getId());
 
         assertEquals("Stock Sold", result);
-        verify(accountServiceClient, times(1)).updateAccountInAccountService(account);
-        verify(userRepository, times(1)).save(testUser);
+        verify(accountServiceClient).updateAccountInAccountService(account);
+        verify(userRepository).save(testUser);
     }
 
     @Test

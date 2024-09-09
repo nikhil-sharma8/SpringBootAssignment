@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:mysql://localhost:3306/spring_boot_assignment
-    username: ${db_user}
-    password: ${db_password}
+    username: root
+    password: root11!:R00t
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
