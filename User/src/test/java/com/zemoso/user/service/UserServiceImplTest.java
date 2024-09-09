@@ -181,3 +181,4 @@ class UserServiceImplTest {
         assertEquals("testUser", username);
     }
 }
+
