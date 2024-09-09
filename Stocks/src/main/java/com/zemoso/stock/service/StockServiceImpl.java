@@ -1,17 +1,19 @@
-package com.zemoso.Stocks.service;
+package com.zemoso.stock.service;
 
-import com.zemoso.Stocks.model.Stock;
-import com.zemoso.Stocks.repository.iStockRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zemoso.stock.model.Stock;
+import com.zemoso.stock.repository.IStockRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StockServiceImpl implements StockService{
+public class StockServiceImpl implements StockService {
 
-    @Autowired
-    iStockRepository stockRepository;
+    IStockRepository stockRepository;
+
+    StockServiceImpl(IStockRepository stockRepository) {
+        this.stockRepository = stockRepository;
+    }
 
     @Override
     public List<Stock> getAllStocks() {

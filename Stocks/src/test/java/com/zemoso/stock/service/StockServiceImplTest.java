@@ -1,7 +1,7 @@
-package com.zemoso.Stocks.service;
+package com.zemoso.stock.service;
 
-import com.zemoso.Stocks.model.Stock;
-import com.zemoso.Stocks.repository.iStockRepository;
+import com.zemoso.stock.model.Stock;
+import com.zemoso.stock.repository.IStockRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class StockServiceImplTest {
 
     @Mock
-    private iStockRepository stockRepository;
+    private IStockRepository stockRepository;
 
     @InjectMocks
     private StockServiceImpl stockService;

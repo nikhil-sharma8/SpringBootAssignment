@@ -1,4 +1,4 @@
-package com.zemoso.Stocks.model;
+package com.zemoso.stock.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class Stock {
     private LocalDate date;
 
     @PrePersist
-    public void setDate(){
+    public void setDate() {
         this.date = LocalDate.now();
     }
 }

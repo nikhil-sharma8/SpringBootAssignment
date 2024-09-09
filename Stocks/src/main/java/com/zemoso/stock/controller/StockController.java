@@ -1,8 +1,7 @@
-package com.zemoso.Stocks.controller;
+package com.zemoso.stock.controller;
 
-import com.zemoso.Stocks.model.Stock;
-import com.zemoso.Stocks.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zemoso.stock.model.Stock;
+import com.zemoso.stock.service.StockService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,26 +10,29 @@ import java.util.List;
 @RequestMapping("/api/v1/stock")
 public class StockController {
 
-    @Autowired
     StockService stockService;
 
+    StockController(StockService stockService) {
+        this.stockService = stockService;
+    }
+
     @GetMapping
-    public List<Stock> getAllStock(){
+    public List<Stock> getAllStock() {
         return stockService.getAllStocks();
     }
 
     @GetMapping("/{symbol}")
-    public Stock getStockById(@PathVariable String symbol){
+    public Stock getStockById(@PathVariable String symbol) {
         return stockService.getStockBySymbol(symbol);
     }
 
     @PostMapping
-    public String saveStock(@RequestBody Stock stock){
+    public String saveStock(@RequestBody Stock stock) {
         return stockService.saveStock(stock);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteStock(@PathVariable Long id){
+    public String deleteStock(@PathVariable Long id) {
         return stockService.deleteStock(id);
     }
 }

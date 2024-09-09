@@ -1,4 +1,4 @@
-package com.zemoso.Stocks;
+package com.zemoso.stock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

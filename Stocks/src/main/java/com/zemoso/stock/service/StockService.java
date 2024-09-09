@@ -1,6 +1,6 @@
-package com.zemoso.Stocks.service;
+package com.zemoso.stock.service;
 
-import com.zemoso.Stocks.model.Stock;
+import com.zemoso.stock.model.Stock;
 
 import java.util.List;
 

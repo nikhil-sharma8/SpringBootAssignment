@@ -1,7 +1,7 @@
-package com.zemoso.Stocks.controller;
+package com.zemoso.stock.controller;
 
-import com.zemoso.Stocks.model.Stock;
-import com.zemoso.Stocks.service.StockService;
+import com.zemoso.stock.model.Stock;
+import com.zemoso.stock.service.StockService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
