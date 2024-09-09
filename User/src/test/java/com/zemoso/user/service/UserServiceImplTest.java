@@ -3,27 +3,19 @@ package com.zemoso.user.service;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.zemoso.user.dto.UserToken;
 import com.zemoso.user.model.Account;
 import com.zemoso.user.model.MyUserDetails;
 import com.zemoso.user.model.Stock;
 import com.zemoso.user.model.User;
 import com.zemoso.user.repository.IUserRepository;
-import com.zemoso.user.service.AccountServiceClient;
-import com.zemoso.user.service.JWTService;
-import com.zemoso.user.service.StockServiceClient;
-import com.zemoso.user.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,15 +30,6 @@ class UserServiceImplTest {
 
     @Mock
     StockServiceClient stockServiceClient;
-
-    @Mock
-    AuthenticationManager authenticationManager;
-
-    @Mock
-    JWTService jwtService;
-
-    @Mock
-    UserToken userToken;
 
     @InjectMocks
     UserServiceImpl userService;
@@ -92,8 +75,9 @@ class UserServiceImplTest {
     void testGetUserById_UserNotFound() {
         when(userRepository.findById(testUser.getId())).thenReturn(Optional.empty());
 
+        Long userId = testUser.getId();
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            userService.getUserById(testUser.getId());
+            userService.getUserById(userId);
         });
 
         assertEquals("User not found", exception.getMessage());
@@ -122,8 +106,9 @@ class UserServiceImplTest {
         when(userRepository.findById(testUser.getId())).thenReturn(Optional.of(testUser));
         when(accountServiceClient.getAccountsOfUser(testUser.getId())).thenReturn(List.of(new Account(2L,"ABC", 100.0, 1L)));
 
+        Long userId = testUser.getId();
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            userService.updateBalance(testUser.getId(), 100.0, 1L);
+            userService.updateBalance(userId, 100.0, 1L);
         });
 
         assertEquals("Account Not Found", exception.getMessage());

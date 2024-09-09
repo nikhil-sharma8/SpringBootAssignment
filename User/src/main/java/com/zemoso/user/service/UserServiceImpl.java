@@ -44,10 +44,12 @@ public class UserServiceImpl implements UserService, IStockService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     public List<User> getAllUsers() {
-        return userRepository.findAll().stream().peek(
-                user ->
-                        user.setAccounts(accountServiceClient.getAccountsOfUser(user.getId()))
-        ).toList();
+        return userRepository.findAll().stream()
+                .map(user -> {
+                    user.setAccounts(accountServiceClient.getAccountsOfUser(user.getId()));
+                    return user;
+                })
+                .toList();
     }
 
     public User getUserById(Long id) {
