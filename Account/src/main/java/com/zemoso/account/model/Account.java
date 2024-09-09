@@ -12,7 +12,6 @@ import java.util.Random;
 @NoArgsConstructor
 @Data
 public class Account {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,10 +27,9 @@ public class Account {
         this.accountNumber = account1;
         this.amount = v;
     }
-
+    Random random = new Random();
     @PrePersist
     public void generateAccountNumber(){
-        Random random = new Random();
         this.accountNumber = "ACC-" +random.nextInt(10000);
     }
 }
