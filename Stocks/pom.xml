@@ -32,7 +32,8 @@
         <sonar.organization>nikhilzemoso</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.exclusions>**/com/zemoso/stock/model/**,
-            **/com/zemoso/stock/repository/**
+            **/com/zemoso/stock/repository/**,
+            **/com/zemoso/stock/StocksApplication.java
         </sonar.exclusions>
     </properties>
     <dependencies>
