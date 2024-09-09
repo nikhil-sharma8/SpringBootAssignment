@@ -1,5 +1,8 @@
 package com.zemoso.user.service;
 
+import com.zemoso.user.config.AccountServiceClient;
+import com.zemoso.user.config.JWTService;
+import com.zemoso.user.config.StockServiceClient;
 import com.zemoso.user.dto.UserToken;
 import com.zemoso.user.model.Account;
 import com.zemoso.user.model.MyUserDetails;
@@ -81,7 +84,6 @@ public class UserServiceImpl implements UserService, IStockService {
             token.setToken(service.generateToken(user.getName()));
             token.setExpiration("30 minutes");
         }
-
 
         return token;
     }

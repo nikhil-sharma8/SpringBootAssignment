@@ -3,6 +3,8 @@ package com.zemoso.user.service;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.zemoso.user.config.AccountServiceClient;
+import com.zemoso.user.config.StockServiceClient;
 import com.zemoso.user.model.Account;
 import com.zemoso.user.model.MyUserDetails;
 import com.zemoso.user.model.Stock;

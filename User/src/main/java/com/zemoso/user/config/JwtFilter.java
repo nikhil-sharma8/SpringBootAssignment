@@ -1,7 +1,5 @@
 package com.zemoso.user.config;
 
-import com.zemoso.user.service.JWTService;
-import com.zemoso.user.service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

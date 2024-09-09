@@ -1,4 +1,4 @@
-package com.zemoso.user.service;
+package com.zemoso.user.config;
 
 import com.zemoso.user.model.Stock;
 import org.springframework.stereotype.Service;

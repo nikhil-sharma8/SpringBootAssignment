@@ -1,4 +1,4 @@
-package com.zemoso.user.service;
+package com.zemoso.user.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
