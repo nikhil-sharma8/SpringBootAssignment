@@ -1,4 +1,4 @@
-package com.zemoso.Account.model;
+package com.zemoso.account.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

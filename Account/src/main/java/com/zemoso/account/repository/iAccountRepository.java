@@ -1,6 +1,6 @@
-package com.zemoso.Account.repository;
+package com.zemoso.account.repository;
 
-import com.zemoso.Account.model.Account;
+import com.zemoso.account.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

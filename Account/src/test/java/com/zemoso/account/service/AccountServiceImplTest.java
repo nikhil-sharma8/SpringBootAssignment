@@ -1,7 +1,7 @@
-package com.zemoso.Account.service;
+package com.zemoso.account.service;
 
-import com.zemoso.Account.model.Account;
-import com.zemoso.Account.repository.iAccountRepository;
+import com.zemoso.account.model.Account;
+import com.zemoso.account.repository.iAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

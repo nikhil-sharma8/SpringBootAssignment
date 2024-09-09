@@ -1,8 +1,7 @@
-package com.zemoso.Account.controller;
+package com.zemoso.account.controller;
 
-import com.zemoso.Account.model.Account;
-import com.zemoso.Account.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zemoso.account.model.Account;
+import com.zemoso.account.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/v1/account")
 public class AccountController {
 
-    @Autowired
     AccountService accountService;
+
+    AccountController(AccountService accountService){
+        this.accountService = accountService;
+    }
 
     @GetMapping
     public List<Account> getAllAccounts(){
@@ -22,7 +24,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getAccountById(@PathVariable Long id) {
+    public ResponseEntity<Object> getAccountById(@PathVariable Long id) {
         try {
             Account account = accountService.getAccountById(id);
             return ResponseEntity.ok(account);

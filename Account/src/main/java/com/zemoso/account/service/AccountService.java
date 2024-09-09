@@ -1,6 +1,6 @@
-package com.zemoso.Account.service;
+package com.zemoso.account.service;
 
-import com.zemoso.Account.model.Account;
+import com.zemoso.account.model.Account;
 
 import java.util.List;
 

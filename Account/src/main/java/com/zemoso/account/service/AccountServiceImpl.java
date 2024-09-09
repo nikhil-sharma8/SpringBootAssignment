@@ -1,8 +1,7 @@
-package com.zemoso.Account.service;
+package com.zemoso.account.service;
 
-import com.zemoso.Account.model.Account;
-import com.zemoso.Account.repository.iAccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zemoso.account.model.Account;
+import com.zemoso.account.repository.iAccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +9,11 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService{
 
-    @Autowired
     iAccountRepository accountRepository;
+
+    AccountServiceImpl(iAccountRepository accountRepository){
+        this.accountRepository = accountRepository;
+    }
 
     public List<Account> getAllAccount(){
         return accountRepository.findAll();
