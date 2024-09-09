@@ -1,7 +1,7 @@
 package com.zemoso.account.service;
 
 import com.zemoso.account.model.Account;
-import com.zemoso.account.repository.iAccountRepository;
+import com.zemoso.account.repository.IAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,10 +14,10 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class AccountServiceImplTest {
+class AccountServiceImplTest {
 
     @Mock
-    private iAccountRepository accountRepository;
+    private IAccountRepository accountRepository;
 
     @InjectMocks
     private AccountServiceImpl accountService;
@@ -25,7 +25,7 @@ public class AccountServiceImplTest {
     private Account account;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.openMocks(this);
 
         account = new Account(1L, "ACC-1234", 1000.00);
@@ -33,7 +33,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testGetAllAccount() {
+    void testGetAllAccount() {
         when(accountRepository.findAll()).thenReturn(Collections.singletonList(account));
 
         assertEquals(1, accountService.getAllAccount().size());
@@ -43,7 +43,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testGetAccountById() {
+    void testGetAccountById() {
         when(accountRepository.findById(1L)).thenReturn(Optional.of(account));
 
         Account result = accountService.getAccountById(1L);
@@ -53,7 +53,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testGetAccountById_NotFound() {
+    void testGetAccountById_NotFound() {
         when(accountRepository.findById(1L)).thenReturn(Optional.empty());
 
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> accountService.getAccountById(1L));
@@ -63,7 +63,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testSaveAccount() {
+    void testSaveAccount() {
         when(accountRepository.save(any(Account.class))).thenReturn(account);
 
         String result = accountService.saveAccount(account);
@@ -73,7 +73,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testDeleteAccount() {
+    void testDeleteAccount() {
         doNothing().when(accountRepository).deleteById(1L);
 
         String result = accountService.deleteAccount(1L);
@@ -83,7 +83,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testGetAccountsByUserId() {
+    void testGetAccountsByUserId() {
         when(accountRepository.findByUserId(1L)).thenReturn(Collections.singletonList(account));
 
         assertEquals(1, accountService.getAccountsByUserId(1L).size());
@@ -93,7 +93,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testUpdateAccount() {
+    void testUpdateAccount() {
         when(accountRepository.findById(1L)).thenReturn(Optional.of(account));
         when(accountRepository.save(any(Account.class))).thenReturn(account);
 
@@ -105,7 +105,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testUpdateAccount_NotFound() {
+    void testUpdateAccount_NotFound() {
         when(accountRepository.findById(1L)).thenReturn(Optional.empty());
 
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> accountService.updateAccount(account));

@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-public class AccountControllerTest {
+class AccountControllerTest {
 
     private MockMvc mockMvc;
 
@@ -32,7 +32,7 @@ public class AccountControllerTest {
     private Account account;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(accountController).build();
 
@@ -41,7 +41,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testGetAllAccounts() throws Exception {
+    void testGetAllAccounts() throws Exception {
         when(accountService.getAllAccount()).thenReturn(Collections.singletonList(account));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/account"))
@@ -52,7 +52,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testGetAccountById() throws Exception {
+    void testGetAccountById() throws Exception {
         when(accountService.getAccountById(anyLong())).thenReturn(account);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/account/1"))
@@ -63,7 +63,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testGetAccountById_NotFound() throws Exception {
+    void testGetAccountById_NotFound() throws Exception {
         when(accountService.getAccountById(anyLong())).thenThrow(new RuntimeException("Account not found"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/account/1"))
@@ -74,7 +74,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testSaveAccount() throws Exception {
+    void testSaveAccount() throws Exception {
         when(accountService.saveAccount(any(Account.class))).thenReturn("Account Saved");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/account")
@@ -87,7 +87,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testDeleteAccount() throws Exception {
+    void testDeleteAccount() throws Exception {
         when(accountService.deleteAccount(anyLong())).thenReturn("Account Deleted");
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/account/1"))
@@ -98,7 +98,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testGetAccountsByUserId() throws Exception {
+    void testGetAccountsByUserId() throws Exception {
         when(accountService.getAccountsByUserId(anyLong())).thenReturn(Collections.singletonList(account));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/account/user/1"))
@@ -109,7 +109,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testUpdateAccount() throws Exception {
+    void testUpdateAccount() throws Exception {
         when(accountService.updateAccount(any(Account.class))).thenReturn("Account Updated");
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/account")

@@ -1,7 +1,7 @@
 package com.zemoso.account.service;
 
 import com.zemoso.account.model.Account;
-import com.zemoso.account.repository.iAccountRepository;
+import com.zemoso.account.repository.IAccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService{
 
-    iAccountRepository accountRepository;
+    IAccountRepository accountRepository;
 
-    AccountServiceImpl(iAccountRepository accountRepository){
+    AccountServiceImpl(IAccountRepository accountRepository){
         this.accountRepository = accountRepository;
     }
 
