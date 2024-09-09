@@ -8,22 +8,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 class StockControllerTest {
 
     private MockMvc mockMvc;
@@ -33,7 +27,7 @@ class StockControllerTest {
     @InjectMocks
     StockController stockController;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = new ObjectMapper();
     @Mock
     IStockService stockService;
 
@@ -70,12 +64,12 @@ class StockControllerTest {
     @Test
     void testBuyStock() throws Exception {
         String stockSymbol = "AAPL";
-        Long accountId = 1L;
+        long accountId = 1L;
         when(stockService.buyStock(anyString(), anyLong())).thenReturn("Stock purchased");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/stocks/buy")
                         .param("stockSymbol", stockSymbol)
-                        .param("accountId", accountId.toString())
+                        .param("accountId", Long.toString(accountId))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Stock purchased"));
@@ -84,12 +78,12 @@ class StockControllerTest {
     @Test
     void testSellStock() throws Exception {
         String stockSymbol = "AAPL";
-        Long accountId = 1L;
+        long accountId = 1L;
         when(stockService.sellStock(anyString(), anyLong())).thenReturn("Stock sold");
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/stocks/sell")
                         .param("stockSymbol", stockSymbol)
-                        .param("accountId", accountId.toString())
+                        .param("accountId", Long.toString(accountId))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Stock sold"));

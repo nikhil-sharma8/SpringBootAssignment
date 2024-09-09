@@ -76,8 +76,8 @@ class UserServiceImplTest {
     @Test
     void testGetUserById_UserNotFound() {
         when(userRepository.findById(testUser.getId())).thenReturn(Optional.empty());
-
-        Exception exception = assertThrows(RuntimeException.class, () -> userService.getUserById(testUser.getId()));
+        Long userId = testUser.getId();
+        Exception exception = assertThrows(RuntimeException.class, () -> userService.getUserById(userId));
 
         assertEquals("User not found", exception.getMessage());
         verify(userRepository).findById(testUser.getId());
@@ -90,7 +90,7 @@ class UserServiceImplTest {
         userService.saveUser(testUser);
 
         verify(userRepository).save(testUser);
-        assertNotEquals("rawPassword", testUser.getPassword());  // Password should be encoded
+        assertNotEquals("rawPassword", testUser.getPassword());
     }
 
     @Test
@@ -104,8 +104,8 @@ class UserServiceImplTest {
     void testUpdateBalance_AccountNotFound() {
         when(userRepository.findById(testUser.getId())).thenReturn(Optional.of(testUser));
         when(accountServiceClient.getAccountsOfUser(testUser.getId())).thenReturn(List.of(new Account(2L,"ABC", 100.0, 1L)));
-
-        Exception exception = assertThrows(RuntimeException.class, () -> userService.updateBalance(testUser.getId(), 100.0, 1L));
+        Long userId = testUser.getId();
+        Exception exception = assertThrows(RuntimeException.class, () -> userService.updateBalance(userId, 100.0, 1L));
 
         assertEquals("Account Not Found", exception.getMessage());
     }

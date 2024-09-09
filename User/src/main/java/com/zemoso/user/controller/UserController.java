@@ -3,7 +3,6 @@ package com.zemoso.user.controller;
 import com.zemoso.user.dto.UserToken;
 import com.zemoso.user.model.User;
 import com.zemoso.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 @RequestMapping("/api/v1/user")
 public class UserController {
 
-    @Autowired
     UserService userService;
 
     UserController(UserService userService){
