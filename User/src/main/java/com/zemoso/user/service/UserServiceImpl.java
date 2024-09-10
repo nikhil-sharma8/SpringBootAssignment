@@ -91,7 +91,6 @@ public class UserServiceImpl implements UserService, IStockService {
     @Override
     public String updateBalance(Long userId, Double amount, Long accountId) {
         User user = getUserById(userId);
-
         Account userAccount = user.getAccounts().stream().filter(account -> account.getId().equals(accountId)).findFirst().orElseThrow(() -> new RuntimeException(accountNotFound));
 
         userAccount.setAmount(userAccount.getAmount() + amount);
